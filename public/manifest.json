@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Stay Paused",
+  "short_name": "Stay Paused",
+  "version": "0.0.1",
+  "description": "Stop videos from autoplaying when you switch to a tab. Media waits until you click.",
+  "minimum_chrome_version": "120",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Stay Paused",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": ["scripting", "storage"],
+  "host_permissions": ["<all_urls>"]
+}
