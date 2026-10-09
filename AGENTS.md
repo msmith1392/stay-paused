@@ -32,6 +32,7 @@ clone). Read it before changing behavior when it exists.
 | `public/`           | `manifest.json` and icons, copied into `dist/` as is.              |
 | `scripts/build.mjs` | esbuild bundler. Each entry is an IIFE.                            |
 | `test/unit/`        | Vitest unit tests.                                                 |
+| `test/e2e/`         | Playwright: Chromium with `dist/` loaded. `@real-site` = YouTube.  |
 | `test/fixtures/`    | Local test pages, served by `npm run fixtures`.                    |
 
 ### Constraints that are easy to get wrong
@@ -43,6 +44,11 @@ clone). Read it before changing behavior when it exists.
 - When blocking `play()`, reject with `DOMException` named `NotAllowedError`. Sites already handle
   that error because Chrome uses it natively.
 - Settings changes apply to new page loads only.
+- In Playwright tests, `page.evaluate()`, `locator.evaluate()`, and `locator.waitFor()` run with a
+  user gesture and **unlock the gate**. Read page state with the gesture-free helpers in
+  `test/e2e/fixtures.ts` (`isPaused`, `playLog`, `waitForMedia`, `hasBeenActive`). The test
+  browser runs with `--autoplay-policy=no-user-gesture-required`, so the extension is the only
+  thing blocking.
 
 ## Commands
 
@@ -51,6 +57,8 @@ npm run build      # dist/
 npm run watch      # rebuild on change
 npm run check      # typecheck + lint + prettier + unit tests
 npm test           # unit tests only
+npm run test:e2e   # build + Playwright against local fixtures (what CI runs)
+npm run test:real  # build + Playwright against YouTube (network, not in CI)
 npm run fixtures   # serve test pages at http://localhost:8787/
 npm run zip        # release/stay-paused-<version>.zip
 ```
@@ -75,10 +83,10 @@ Load `dist/` unpacked at `chrome://extensions` to test. Keep `version` in `packa
 ## Milestone status
 
 - [x] 0. Scaffold
-- [x] 1. Gate works on local fixtures (unit-tested; browser-verified in 4)
-- [ ] 2. Real-site check (YouTube background tabs, folded into 4)
+- [x] 1. Gate works on local fixtures
+- [x] 2. Real-site check (YouTube background tabs, via `npm run test:real`)
 - [x] 3. Settings, popup, allowlist, badge
-- [ ] 4. Playwright E2E + CI
+- [x] 4. Playwright E2E + CI
 - [ ] 5. Store assets and listing
 - [ ] 6. Submit
 - [ ] 7. v1.1

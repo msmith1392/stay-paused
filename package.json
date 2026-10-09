@@ -15,12 +15,16 @@
     "format:check": "prettier --check .",
     "zip": "npm run build && node scripts/zip.mjs",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm test",
-    "test": "vitest run",
-    "fixtures": "node scripts/serve-fixtures.mjs"
+    "test": "vitest run --dir test/unit",
+    "fixtures": "node scripts/serve-fixtures.mjs",
+    "test:e2e": "npm run build && playwright test --grep-invert @real-site",
+    "test:real": "npm run build && playwright test --grep @real-site"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.0",
     "@types/chrome": "^0.3.4",
+    "@types/node": "^26.6.4",
     "esbuild": "^0.28.2",
     "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",

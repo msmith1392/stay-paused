@@ -18,7 +18,7 @@ No data collection, no network requests, no analytics, no remote code.
 
 ## Develop
 
-Requires Node 20+ and Chrome 120+.
+Requires Node 20+ and Chrome 120+. For E2E tests, run `npx playwright install chromium` once.
 
 ```bash
 npm install
