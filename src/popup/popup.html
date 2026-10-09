@@ -7,8 +7,49 @@
   </head>
   <body>
     <main>
-      <h1>Stay Paused</h1>
-      <p id="status">Autoplay is blocked until you interact with a page.</p>
+      <header>
+        <h1>Stay Paused</h1>
+        <label class="switch">
+          <input type="checkbox" id="enabled" />
+          <span class="track" aria-hidden="true"></span>
+          <span class="visually-hidden">Block autoplay</span>
+        </label>
+      </header>
+      <p id="summary" class="muted"></p>
+
+      <section id="site-section">
+        <label class="row">
+          <span> Allow autoplay on <strong id="site-name"></strong> </span>
+          <span class="switch">
+            <input type="checkbox" id="site-allowed" />
+            <span class="track" aria-hidden="true"></span>
+          </span>
+        </label>
+      </section>
+      <p id="site-unavailable" class="muted" hidden>Stay Paused does not run on this page.</p>
+
+      <section>
+        <label class="row">
+          <span>
+            Also block muted videos
+            <small class="muted">May stop animated previews on some sites.</small>
+          </span>
+          <span class="switch">
+            <input type="checkbox" id="block-muted" />
+            <span class="track" aria-hidden="true"></span>
+          </span>
+        </label>
+      </section>
+
+      <div id="reload-notice" class="notice" hidden>
+        <span>Changes apply when a page loads.</span>
+        <button type="button" id="reload">Reload tab</button>
+      </div>
+
+      <section id="allowlist-section" hidden>
+        <h2>Allowed sites</h2>
+        <ul id="allowlist"></ul>
+      </section>
     </main>
     <script src="popup.js"></script>
   </body>

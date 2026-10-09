@@ -22,10 +22,11 @@ clone). Read it before changing behavior when it exists.
 
 | File                | Role                                                               |
 | ------------------- | ------------------------------------------------------------------ |
-| `src/background.ts` | Service worker. Registers `gate.js` with `chrome.scripting`.       |
+| `src/background.ts` | Service worker. Registers the gate from settings, sets the badge.  |
 | `src/gate.ts`       | MAIN-world script at `document_start`, all frames. Wraps `play()`. |
 | `src/gate-logic.ts` | Pure allow/block decision. Unit-tested.                            |
 | `src/globals.d.ts`  | Build-time `__BLOCK_MUTED__` flag (`gate.js` vs `gate-strict.js`). |
+| `src/allowlist.ts`  | Pure allowlist helpers: URL to site, site to match patterns.       |
 | `src/settings.ts`   | Typed `chrome.storage.sync` wrapper and defaults.                  |
 | `src/popup/`        | Toolbar popup, vanilla TS.                                         |
 | `public/`           | `manifest.json` and icons, copied into `dist/` as is.              |
@@ -75,8 +76,8 @@ Load `dist/` unpacked at `chrome://extensions` to test. Keep `version` in `packa
 
 - [x] 0. Scaffold
 - [x] 1. Gate works on local fixtures (unit-tested; browser-verified in 4)
-- [ ] 2. Real-site check (YouTube background tabs)
-- [ ] 3. Settings, popup, allowlist, badge
+- [ ] 2. Real-site check (YouTube background tabs, folded into 4)
+- [x] 3. Settings, popup, allowlist, badge
 - [ ] 4. Playwright E2E + CI
 - [ ] 5. Store assets and listing
 - [ ] 6. Submit

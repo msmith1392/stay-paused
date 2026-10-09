@@ -15,7 +15,14 @@ export const DEFAULT_SETTINGS: Settings = {
 
 export async function loadSettings(): Promise<Settings> {
   const stored = await chrome.storage.sync.get(DEFAULT_SETTINGS);
-  return { ...DEFAULT_SETTINGS, ...(stored as Partial<Settings>) };
+  return {
+    enabled: typeof stored.enabled === 'boolean' ? stored.enabled : DEFAULT_SETTINGS.enabled,
+    blockMuted:
+      typeof stored.blockMuted === 'boolean' ? stored.blockMuted : DEFAULT_SETTINGS.blockMuted,
+    allowlist: Array.isArray(stored.allowlist)
+      ? stored.allowlist.filter((s): s is string => typeof s === 'string')
+      : DEFAULT_SETTINGS.allowlist,
+  };
 }
 
 export async function saveSettings(patch: Partial<Settings>): Promise<void> {
