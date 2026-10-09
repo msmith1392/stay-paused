@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>JS play() on load</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="status.js"></script>
+  </head>
+  <body>
+    <p><a href="./">All fixtures</a></p>
+    <h1>JS play() on load</h1>
+    <p class="expect">
+      Expect: PAUSED and play() rejected with NotAllowedError. Plays after you click the button.
+    </p>
+    <video data-name="js-play" src="clip.wav" loop controls></video>
+    <button id="btn">Play from a click</button>
+    <pre id="status"></pre>
+    <script>
+      const video = document.querySelector('video');
+      logResult('js-play on load', video.play());
+      document.getElementById('btn').addEventListener('click', () => {
+        logResult('js-play on click', video.play());
+      });
+    </script>
+  </body>
+</html>

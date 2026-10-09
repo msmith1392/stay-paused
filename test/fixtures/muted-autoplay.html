@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Muted autoplay</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="status.js"></script>
+  </head>
+  <body>
+    <p><a href="./">All fixtures</a></p>
+    <h1>Muted autoplay</h1>
+    <p class="expect">
+      Expect: PLAYING (muted) with default settings. PAUSED with "Also block muted videos" on.
+    </p>
+    <video data-name="muted-autoplay" src="clip.wav" autoplay muted loop controls></video>
+    <pre id="status"></pre>
+  </body>
+</html>

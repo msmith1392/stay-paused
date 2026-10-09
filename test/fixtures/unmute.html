@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Muted autoplay, then unmuted by script</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="status.js"></script>
+  </head>
+  <body>
+    <p><a href="./">All fixtures</a></p>
+    <h1>Muted autoplay, then unmuted by script</h1>
+    <p class="expect">
+      Expect: PLAYING (muted) at first, then PAUSED when the page unmutes it after 1 second.
+    </p>
+    <video data-name="unmute" src="clip.wav" autoplay muted loop controls></video>
+    <pre id="status"></pre>
+    <script>
+      setTimeout(() => {
+        document.querySelector('video').muted = false;
+      }, 1000);
+    </script>
+  </body>
+</html>

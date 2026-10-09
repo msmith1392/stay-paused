@@ -24,10 +24,14 @@ clone). Read it before changing behavior when it exists.
 | ------------------- | ------------------------------------------------------------------ |
 | `src/background.ts` | Service worker. Registers `gate.js` with `chrome.scripting`.       |
 | `src/gate.ts`       | MAIN-world script at `document_start`, all frames. Wraps `play()`. |
+| `src/gate-logic.ts` | Pure allow/block decision. Unit-tested.                            |
+| `src/globals.d.ts`  | Build-time `__BLOCK_MUTED__` flag (`gate.js` vs `gate-strict.js`). |
 | `src/settings.ts`   | Typed `chrome.storage.sync` wrapper and defaults.                  |
 | `src/popup/`        | Toolbar popup, vanilla TS.                                         |
 | `public/`           | `manifest.json` and icons, copied into `dist/` as is.              |
 | `scripts/build.mjs` | esbuild bundler. Each entry is an IIFE.                            |
+| `test/unit/`        | Vitest unit tests.                                                 |
+| `test/fixtures/`    | Local test pages, served by `npm run fixtures`.                    |
 
 ### Constraints that are easy to get wrong
 
@@ -44,7 +48,9 @@ clone). Read it before changing behavior when it exists.
 ```bash
 npm run build      # dist/
 npm run watch      # rebuild on change
-npm run check      # typecheck + lint + prettier
+npm run check      # typecheck + lint + prettier + unit tests
+npm test           # unit tests only
+npm run fixtures   # serve test pages at http://localhost:8787/
 npm run zip        # release/stay-paused-<version>.zip
 ```
 
@@ -68,7 +74,7 @@ Load `dist/` unpacked at `chrome://extensions` to test. Keep `version` in `packa
 ## Milestone status
 
 - [x] 0. Scaffold
-- [ ] 1. Gate works on local fixtures
+- [x] 1. Gate works on local fixtures (unit-tested; browser-verified in 4)
 - [ ] 2. Real-site check (YouTube background tabs)
 - [ ] 3. Settings, popup, allowlist, badge
 - [ ] 4. Playwright E2E + CI

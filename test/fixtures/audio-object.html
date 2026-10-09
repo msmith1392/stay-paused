@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>new Audio() not in the DOM</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="status.js"></script>
+  </head>
+  <body>
+    <p><a href="./">All fixtures</a></p>
+    <h1>new Audio() not in the DOM</h1>
+    <p class="expect">Expect: PAUSED and play() rejected. Plays after you click the button.</p>
+    <button id="btn">Play from a click</button>
+    <pre id="status"></pre>
+    <script>
+      const audio = new Audio('clip.wav');
+      audio.loop = true;
+      audio.dataset.name = 'audio-object';
+      window.__media.push(audio);
+      logResult('audio-object on load', audio.play());
+      document.getElementById('btn').addEventListener('click', () => {
+        logResult('audio-object on click', audio.play());
+      });
+    </script>
+  </body>
+</html>

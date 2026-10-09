@@ -6,12 +6,7 @@ const watch = process.argv.includes('--watch');
 const outdir = 'dist';
 
 /** @type {import('esbuild').BuildOptions} */
-const options = {
-  entryPoints: {
-    background: 'src/background.ts',
-    gate: 'src/gate.ts',
-    'popup/popup': 'src/popup/popup.ts',
-  },
+const common = {
   outdir,
   bundle: true,
   // IIFE keeps the MAIN-world gate from leaking globals into the page.
@@ -22,6 +17,17 @@ const options = {
   logLevel: 'info',
 };
 
+/** @type {import('esbuild').BuildOptions[]} */
+const builds = [
+  {
+    ...common,
+    entryPoints: { background: 'src/background.ts', 'popup/popup': 'src/popup/popup.ts' },
+  },
+  // Two gate variants from one source. The background registers whichever the settings call for.
+  { ...common, entryPoints: { gate: 'src/gate.ts' }, define: { __BLOCK_MUTED__: 'false' } },
+  { ...common, entryPoints: { 'gate-strict': 'src/gate.ts' }, define: { __BLOCK_MUTED__: 'true' } },
+];
+
 async function copyStatic() {
   await cp('public', outdir, { recursive: true });
   await cp('src/popup/popup.html', `${outdir}/popup/popup.html`);
@@ -31,12 +37,12 @@ async function copyStatic() {
 await rm(outdir, { recursive: true, force: true });
 
 if (watch) {
-  const ctx = await esbuild.context({
-    ...options,
-    plugins: [{ name: 'copy-static', setup: (b) => b.onEnd(copyStatic) }],
-  });
-  await ctx.watch();
+  const plugins = [{ name: 'copy-static', setup: (b) => b.onEnd(copyStatic) }];
+  for (const options of builds) {
+    const ctx = await esbuild.context({ ...options, plugins });
+    await ctx.watch();
+  }
 } else {
-  await esbuild.build(options);
+  await Promise.all(builds.map((options) => esbuild.build(options)));
   await copyStatic();
 }

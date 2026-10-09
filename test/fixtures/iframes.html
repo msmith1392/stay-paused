@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Same-origin and cross-origin iframes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <p><a href="./">All fixtures</a></p>
+    <h1>Same-origin and cross-origin iframes</h1>
+    <p class="expect">
+      Expect: both iframes show PAUSED. Each plays after you press play inside it.
+    </p>
+    <h2>Same origin</h2>
+    <iframe id="same" src="autoplay-attr.html" allow="autoplay"></iframe>
+    <h2>Cross origin</h2>
+    <iframe id="cross" allow="autoplay"></iframe>
+    <script>
+      // localhost and 127.0.0.1 are different origins served by the same fixture server.
+      const other = location.hostname === 'localhost' ? '127.0.0.1' : 'localhost';
+      document.getElementById('cross').src =
+        `${location.protocol}//${other}:${location.port}/autoplay-attr.html`;
+    </script>
+  </body>
+</html>

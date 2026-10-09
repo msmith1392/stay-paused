@@ -33,12 +33,14 @@ Then in Chrome:
 
 After code changes, click the reload icon on the extension card and reload the test tab.
 
-| Command         | What it does                                  |
-| --------------- | --------------------------------------------- |
-| `npm run build` | Build into `dist/`                            |
-| `npm run watch` | Rebuild on change                             |
-| `npm run check` | Typecheck, lint, and format check             |
-| `npm run zip`   | Build and package `release/stay-paused-*.zip` |
+| Command            | What it does                                  |
+| ------------------ | --------------------------------------------- |
+| `npm run build`    | Build into `dist/`                            |
+| `npm run watch`    | Rebuild on change                             |
+| `npm run check`    | Typecheck, lint, format check, and unit tests |
+| `npm test`         | Unit tests                                    |
+| `npm run fixtures` | Serve test pages at http://localhost:8787/    |
+| `npm run zip`      | Build and package `release/stay-paused-*.zip` |
 
 ## License
 
