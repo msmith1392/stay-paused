@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Screenshot 3: privacy</title>
+    <link rel="stylesheet" href="store.css" />
+    <style>
+      .facts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .fact {
+        padding: 28px;
+        border-radius: 14px;
+        background: var(--card);
+        box-shadow: 0 1px 2px rgb(15 23 42 / 0.08);
+      }
+
+      .fact strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 24px;
+      }
+
+      .fact span {
+        font-size: 18px;
+        line-height: 1.45;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scene">
+      <div class="copy">
+        <div class="brand">
+          <img src="../../public/icons/icon.svg" alt="" />
+          Stay Paused
+        </div>
+        <h1>Private by design.</h1>
+        <p>It does one thing, on your computer, and nothing else.</p>
+      </div>
+
+      <div class="facts">
+        <div class="fact">
+          <strong>No data collected</strong>
+          <span>No analytics, no tracking, no accounts.</span>
+        </div>
+        <div class="fact">
+          <strong>No network requests</strong>
+          <span>The extension never talks to a server.</span>
+        </div>
+        <div class="fact">
+          <strong>Open source</strong>
+          <span>Every line is public under the MIT license.</span>
+        </div>
+        <div class="fact">
+          <strong>Tiny</strong>
+          <span>A few hundred lines of code. No third-party libraries.</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

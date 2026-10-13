@@ -34,6 +34,8 @@ clone). Read it before changing behavior when it exists.
 | `test/unit/`        | Vitest unit tests.                                                 |
 | `test/e2e/`         | Playwright: Chromium with `dist/` loaded. `@real-site` = YouTube.  |
 | `test/fixtures/`    | Local test pages, served by `npm run fixtures`.                    |
+| `store/`            | Store listing copy, image sources (`src/`), rendered `assets/`.    |
+| `PRIVACY.md`        | Privacy policy linked from the store listing.                      |
 
 ### Constraints that are easy to get wrong
 
@@ -61,10 +63,16 @@ npm run test:e2e   # build + Playwright against local fixtures (what CI runs)
 npm run test:real  # build + Playwright against YouTube (network, not in CI)
 npm run fixtures   # serve test pages at http://localhost:8787/
 npm run zip        # release/stay-paused-<version>.zip
+npm run store:assets  # render public/icons/*.png and store/assets/*.jpg
 ```
 
 Load `dist/` unpacked at `chrome://extensions` to test. Keep `version` in `package.json` and
 `public/manifest.json` in sync (`npm run zip` fails if they differ).
+
+Icons and store images are generated. Edit `scripts/render-store-assets.mjs` or `store/src/`, then
+run `npm run store:assets`. Never hand-edit the PNG/JPG outputs. If the popup UI changes,
+re-render, because screenshot 2 embeds the real popup. Keep `PRIVACY.md` and `store/listing.md`
+accurate when permissions or behavior change.
 
 ## Git
 
@@ -87,6 +95,6 @@ Load `dist/` unpacked at `chrome://extensions` to test. Keep `version` in `packa
 - [x] 2. Real-site check (YouTube background tabs, via `npm run test:real`)
 - [x] 3. Settings, popup, allowlist, badge
 - [x] 4. Playwright E2E + CI
-- [ ] 5. Store assets and listing
+- [x] 5. Store assets and listing
 - [ ] 6. Submit
 - [ ] 7. v1.1

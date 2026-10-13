@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Screenshot 2: controls</title>
+    <link rel="stylesheet" href="store.css" />
+    <style>
+      .popup-frame {
+        justify-self: center;
+        width: 300px;
+        height: 290px;
+        border: 0;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow:
+          0 1px 2px rgb(15 23 42 / 0.08),
+          0 24px 60px rgb(15 23 42 / 0.18);
+        /* The real popup, enlarged so it reads at store thumbnail size. */
+        transform: scale(1.75);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scene">
+      <div class="copy">
+        <div class="brand">
+          <img src="../../public/icons/icon.svg" alt="" />
+          Stay Paused
+        </div>
+        <h1>Simple controls.</h1>
+        <ul>
+          <li>Turn it off with one switch</li>
+          <li>Allow autoplay on sites you choose</li>
+          <li>Optionally block muted previews too</li>
+        </ul>
+      </div>
+      <!-- Loads the built popup. The render script stubs chrome.* so it shows sample settings. -->
+      <iframe class="popup-frame" src="../../dist/popup/popup.html" title="Popup"></iframe>
+    </div>
+  </body>
+</html>

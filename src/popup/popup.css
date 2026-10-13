@@ -89,7 +89,7 @@ section {
 
 strong {
   font-weight: 600;
-  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 /* Disabled state: everything but the main switch is dimmed. */

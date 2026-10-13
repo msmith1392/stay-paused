@@ -1,6 +1,6 @@
 {
   "name": "stay-paused",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "description": "Chrome extension that stops video and audio from autoplaying until you interact with the page.",
   "license": "MIT",
@@ -18,7 +18,8 @@
     "test": "vitest run --dir test/unit",
     "fixtures": "node scripts/serve-fixtures.mjs",
     "test:e2e": "npm run build && playwright test --grep-invert @real-site",
-    "test:real": "npm run build && playwright test --grep @real-site"
+    "test:real": "npm run build && playwright test --grep @real-site",
+    "store:assets": "npm run build && node scripts/render-store-assets.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -33,5 +34,13 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.1",
     "vitest": "^5.0.3"
+  },
+  "homepage": "https://github.com/msmith1392/stay-paused#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msmith1392/stay-paused.git"
+  },
+  "bugs": {
+    "url": "https://github.com/msmith1392/stay-paused/issues"
   }
 }
